@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-
+    
     public float Speed;
-
     private Transform backPoint;
 
     private Animator animator;
-
     private Rigidbody2D rig;
 
     void Start()
@@ -21,23 +18,29 @@ public class Enemy : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        //transform.Translate(Vector3.left * Speed * Time.deltaTime);
+        //Mesma logica da bala só que para a esquerda
+        //transform.Translate(Vector3.left * Speed * Time.deltaTime); 
 
         rig.velocity = new Vector2(-Speed, rig.velocity.y);
 
-        if(transform.position.x < backPoint.position.x){
+        if(transform.position.x < backPoint.position.x)      
+        {
             Destroy(gameObject);
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision){
-        if(collision.gameObject.tag == "bullet"){
+    //Metodo para verificar colisao da bala no inimigo
+    void OnTriggerEnter2D(Collider2D collision) 
+    {
+        //Se o inimigo bateu na bala
+        if(collision.gameObject.tag == "bullet")
+        {
             animator.SetTrigger("destroy");
             Destroy(gameObject, 1f);
         }
+        
     }
-
 }
