@@ -38,8 +38,6 @@ public class Enemy : MonoBehaviour
         //Se o inimigo bateu na bala
         if(collision.gameObject.tag == "bullet")
         {
-            GetComponent<CircleCollider2D>().enabled = false;
-            GameController.current.AddScore(10);
             animator.SetTrigger("destroy");
             Destroy(gameObject, 1f);
         }
